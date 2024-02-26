@@ -168,3 +168,6 @@ cython_debug/
 *.run.xml
 *.synctex.gz
 *.toc
+
+# Ignore the word_embeddings
+glove.6B.*
