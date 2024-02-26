@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 
 % some definitions for the title page
-\newcommand{\reporttitle}{NLP Coureswork}
+\newcommand{\reporttitle}{NLP Coursework}
 \newcommand{\reportdescription}{}
 
 % load some definitions and default packages
@@ -34,6 +34,13 @@
     \item \textbf{10 marks}: Successful implementation of a model (train and produce predictions which outperform the F1 score for the RoBERTa-base baseline provided). 7 marks for outperforming the baseline model on the official dev set (0.48) and 3 marks for outperforming the baseline model on the test set (0.49).
     \item \textbf{5 marks}: Choice of model hyper-parameters and description of your model setup. This should include choosing an appropriate learning rate and checking whether implementing a learning schedule improves performance. Also consider whether your model is cased or uncased. You should mention how many epochs you train the model for, whether you are using any early-stopping, and how you are using the training labels.
     \item \textbf{10 marks}: Further model improvements (beyond using a bigger transformer model), for example pre-processing, data sampling, data augmentation, ensembling, etc. Two main improvements, with a third less explored improvement is sufficient. For example: try several different data sampling approaches, try several data augmentation strategies by perturbing observations in different ways, and then see if incorporating one of the categorical columns improves performance.
+    \begin{warning}
+        \begin{itemize}
+            \item try and balance out the classes by applying synonyms to low frequency labels
+            \item data-sampling, research: is it common to feed in an equal proportion of each class in batches during training?
+            \item using country code also
+        \end{itemize}
+    \end{warning}
     \item \textbf{10 marks}: Compare your model performance to two simple baselines (e.g. a BoW model). Share some of the features that one of your baseline models used, and highlight an example misclassified with a suggestion of why the baseline may have made the misclassification.
     \item \textbf{5 marks}: Description of the model results and your hyper-parameter tuning (some evidence of this is required in your report). Your results should show how the different strategies you have tried impacted the model performance. For any results presented in your paper, you should be clear if these are from your own internal dev set or the official dev set.
 \end{enumerate}
