@@ -1,32 +1,77 @@
-\documentclass[11pt]{article}
+%
+% File acl2019.tex
+%
+%% Based on the style files for ACL 2018, NAACL 2018/19, which were
+%% Based on the style files for ACL-2015, with some improvements
+%%  taken from the NAACL-2016 style
+%% Based on the style files for ACL-2014, which were, in turn,
+%% based on ACL-2013, ACL-2012, ACL-2011, ACL-2010, ACL-IJCNLP-2009,
+%% EACL-2009, IJCNLP-2008...
+%% Based on the style files for EACL 2006 by 
+%%e.agirre@ehu.es or Sergi.Balari@uab.es
+%% and that of ACL 08 by Joakim Nivre and Noah Smith
 
-% some definitions for the title page
-\newcommand{\reporttitle}{NLP Coursework}
-\newcommand{\reportdescription}{}
+\documentclass[11pt,a4paper]{article}
+\usepackage{acl2019}
+\usepackage{times}
+\usepackage{latexsym}
 
-% load some definitions and default packages
-\input{../../../../.latex-templates/includes}
-\input{../../../../.latex-templates/notation}
+\usepackage{url}
+
+\aclfinalcopy % Uncomment this line for the final submission
+% \def\aclpaperid{***} %  Enter the acl Paper ID here
+
+% \setlength\titlebox{5cm}  
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size); we will check this
+% in the camera-ready version and ask you to change it back.
+
+\title{Imperial College: `Don't Patronize Me!' Coursework 2024}
+
+\author{Anton Zhitomirsky \\
+  Imperial College London \\
+  \texttt{az620@ic.ac.uk} \\}
 
 \begin{document}
+\maketitle
 
-% Include the title page
-\input{../../../../.latex-templates/titlepage}
+\section{Introduction}
 
-\appendix
+% \textbf{5 marks}: Introduction, with an explanation of the task and the
+% dataset. You may want to read/cite the task paper (and any other paper of
+% your choosing).
 
-\section{Mark Scheme}
+Most social media websites contain portals through which even unregistered users can view their content. Focusing primarily on textual posts, this leaves many vulnerable users to unfiltered content, which may be harmful if not regulated. \citet{Ng-discrimination} concludes that regardless of intention, if this content goes unfiltered it may ``justify'', ``encode'', ``enact'' and ``routinize'' discrimination amongst targeted groups.
 
-\subsection{Data analysis of the training data \textbf{(15 marks)}}
+This motivates the creation and popularization of The Don't Patronize Me! dataset to provide a source for engineers to develop categorization algorithms to progress the protection of targeted groups. The dataset, authored by \citet{perez-almendros-etal-2020-dont}, is a labelled dataset containing more than 10,000 paragraphs extracted from news stories, country of origin, and keyword which is then labelled indicating its level of Patronizing and Condescending Language (PCL).
 
-\emph{For a written description of the training data. This should include}
+I propose an extension to the base-line categorization model `\texttt{RoBERTa}' which beats the initial benchmarks of \texttt{0.48} F1-score on the dev-set and \texttt{0.49} on the test-set. 
 
-\begin{enumerate}
-    \item \textbf{5 marks}: Analysis of the class labels: how frequent these are and how they correlate with any feature of the data, e.g. input length.
-    \item \textbf{10 marks}: Qualitative assessment of the dataset, considering either how hard or how subjective the task is, providing examples in your report.
-\end{enumerate}
+\vspace{1em}
 
-\subsection{Modelling \textbf{(40 marks)}}
+\begin{tabular}{ |p{2cm}||p{1.7cm}|p{1.7cm}|  }
+ \hline
+ Model& F1 dev-set & F1 val-set \\
+ \hline
+ RoBERTa (Baseline) & 0.48 & 0.49 \\
+ \hline
+ Mine&  ?  &  ? \\
+ \hline
+\end{tabular}
+
+\section{Data Analysis}
+
+% \emph{For a written description of the training data. This should include}
+
+% \begin{enumerate}
+%     \item \textbf{5 marks}: Analysis of the class labels: how frequent these are and how they correlate with any feature of the data, e.g. input length.
+%     \item \textbf{10 marks}: Qualitative assessment of the dataset, considering either how hard or how subjective the task is, providing examples in your report.
+% \end{enumerate}
+
+The data arrives labeled with a balanced distribution between countries and keyword. 
+
+\section{Modelling}
 
 \emph{For the successful implementation of a classifier model (this could be a transformer or any other ML model of your choice. Do give justification for your choice.):}
 
@@ -34,18 +79,16 @@
     \item \textbf{10 marks}: Successful implementation of a model (train and produce predictions which outperform the F1 score for the RoBERTa-base baseline provided). 7 marks for outperforming the baseline model on the official dev set (0.48) and 3 marks for outperforming the baseline model on the test set (0.49).
     \item \textbf{5 marks}: Choice of model hyper-parameters and description of your model setup. This should include choosing an appropriate learning rate and checking whether implementing a learning schedule improves performance. Also consider whether your model is cased or uncased. You should mention how many epochs you train the model for, whether you are using any early-stopping, and how you are using the training labels.
     \item \textbf{10 marks}: Further model improvements (beyond using a bigger transformer model), for example pre-processing, data sampling, data augmentation, ensembling, etc. Two main improvements, with a third less explored improvement is sufficient. For example: try several different data sampling approaches, try several data augmentation strategies by perturbing observations in different ways, and then see if incorporating one of the categorical columns improves performance.
-    \begin{warning}
         \begin{itemize}
             \item try and balance out the classes by applying synonyms to low frequency labels
             \item data-sampling, research: is it common to feed in an equal proportion of each class in batches during training?
             \item using country code also
         \end{itemize}
-    \end{warning}
     \item \textbf{10 marks}: Compare your model performance to two simple baselines (e.g. a BoW model). Share some of the features that one of your baseline models used, and highlight an example misclassified with a suggestion of why the baseline may have made the misclassification.
     \item \textbf{5 marks}: Description of the model results and your hyper-parameter tuning (some evidence of this is required in your report). Your results should show how the different strategies you have tried impacted the model performance. For any results presented in your paper, you should be clear if these are from your own internal dev set or the official dev set.
 \end{enumerate}
 
-\subsection{Analysis \textbf{(15 marks)}}
+\section{Analysis}
 
 \emph{Analysis questions to be answered (these questions can be answered without training any additional models): Your report should state the analysis questions so that this can be read as a self-contained report, rather than referring to ‘analysis question 1’ etc.}
 
@@ -55,22 +98,13 @@
     \item \textbf{5 marks}: To what extent does model performance depend on the data categories? E.g. Observations for homeless vs poor-families, etc.
 \end{enumerate}
 
-\subsection{Written report \textbf{(30 marks)}}
+\section{Conclusion}
 
-\emph{Marks are awarded for the quality of your written report:}
-
-\begin{enumerate}
-    \item \textbf{5 marks}: Introduction, with an explanation of the task and the
-    dataset. You may want to read/cite the task paper (and any other paper of
-    your choosing).
-    \item \textbf{10 marks}: Readability of the report (language, coherence, clarity of
-    results etc.).
-    \item \textbf{10 marks}: Good use of graphs or results tables that address the
-    analysis questions. Make sure any text on your graphs is clearly readable.
-    \item \textbf{5 marks}: Conclusion, with a summary of your results, and your key
+\textbf{5 marks}: Conclusion, with a summary of your results, and your key
     findings from the analysis questions. You should suggest at least one further
     experiment as a next step.
-\end{enumerate}
 
+\bibliography{references}
+\bibliographystyle{acl_natbib}
 
 \end{document}
