@@ -171,3 +171,7 @@ cython_debug/
 
 # Ignore the word_embeddings
 glove.6B.*
+
+# Ignore outputs from the baseline test
+src/baseline/outputs/
+src/baseline/runs/
