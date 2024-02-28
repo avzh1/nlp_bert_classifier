@@ -64,7 +64,7 @@ I propose an extension to the base-line categorization model `\texttt{RoBERTa}' 
     \caption{F1 score of models attempted}    
 \end{table}
 
-\section{Data Analysis}
+\section{Data}
 
 % \emph{For a written description of the training data. This should include}
 
@@ -79,7 +79,7 @@ Labels arrive annotated by two main annotators. Their values span from $[0,4]$ i
 
 Data also arrives with labeled country information indicating the source media outlet, and a keyword field. The keyword is provided as input to the model as the search term used to retrieve texts about a target community.
 
-\subsection{Data}
+\subsection{Data Distribution}
 
 % The data arrives labeled with a balanced distribution between countries and keyword.
 
@@ -94,7 +94,15 @@ Data also arrives with labeled country information indicating the source media o
 
 The test data contains a disproportionate number of negative (9475) and positive (993) examples of PCL. Furthermore, the distribution of word counts between the two (See Figure~\ref{fig:word-count}) offers no obvious underlying pattern between the two classes. This is because natural language is about how words are said, instead of the quantity. 
 
-Indeed, \citet{perez-almendros-etal-2020-dont} mention the subjective nature of the task as it is very subjective. The word `lovely' appears uniquely in PCL text examples. This word isn't negative, but in the context of the sentence (par\_id: 2404) ``We think it's lovely that so many have come forward to help out a family clearly in need!'' the sentence has been labeled as blatantly PCL with a score of 3. In-fact, tweaking the sentence from ``a family clearly in need'' to ``families in need'' removes entitlement and converts it to compassion. 
+\subsection{Subjective Difficulty}
+
+Indeed, \citet{perez-almendros-etal-2020-dont} mention the subjective nature of the task as it is very subjective. The word `lovely' appears uniquely in PCL text examples. This word isn't negative, but in the context of the sentence (par\_id: 2404) ``We think it's lovely that so many have come forward to help out a family clearly in need!'' the sentence has been labeled as blatantly PCL with a score of 3. In-fact, tweaking the sentence from ``a family clearly in need'' to ``families in need'' removes entitlement and converts it to compassion.
+
+\subsection{Handling Artifacts}
+
+The flexible environment of news articles allows for authors to post resources and further reading, like in the case of par\_id: 2838: \emph{``Read more about the site's history here: [LINK]''}. Therefore, with a primitive language processing model, we cannot determine the degree of PCL from a link. Some links and references are also clipped in the source with token ``TOOLONG'' which also aught to be pre-processed to avoid confusion from the model. Additionally, writers are free to reference other users (par\_id: 5598 ``@toekunbore [...]''), the handle of which would likely be ignored by language models.
+
+Lastly, adding to the complexity of processing language, we must also filter and process out-of-vocabulary words. This may appear in the form of a typo like in par\_id: 8221 \emph{``Do they think it is "" \textbf{jsutice} "" \textbf{ti} imprison [...]''}, hyperboles like par\_id: 5333 \emph{``But \textbf{nooooo} [...]''}, or slang like in par\_id: 1674 \emph{``Kyle really your a pig, \textbf{lol} [...]''}.
 
 \section{Modelling}
 
