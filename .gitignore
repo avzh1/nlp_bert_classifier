@@ -175,3 +175,6 @@ glove.6B.*
 # Ignore outputs from the baseline test
 src/baseline/outputs/
 src/baseline/runs/
+
+# Ignore runs
+src/runs/
