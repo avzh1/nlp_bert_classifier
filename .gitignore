@@ -178,3 +178,6 @@ src/baseline/runs/
 
 # Ignore runs
 src/runs/
+
+# Ignore eda
+src/eda_nlp/

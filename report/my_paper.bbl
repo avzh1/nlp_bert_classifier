@@ -1,0 +1,19 @@
+\begin{thebibliography}{3}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Fernández et~al.(2018)Fernández, García, Galar, Prati, Krawczyk, and Herrera}]{alberto-imbalanced-datasets}
+Alberto Fernández, Salvador García, Mikel Galar, Ronaldo~C. Prati, Bartosz Krawczyk, and Francisco Herrera. 2018.
+\newblock \href {https://doi.org/https://doi.org/10.1007/978-3-319-98074-4} {\emph{Learning from Imbalanced Data Sets}}.
+\newblock Springer Cham.
+
+\bibitem[{Ng(2007)}]{Ng-discrimination}
+Sik~Hung Ng. 2007.
+\newblock \href {https://doi.org/10.1177/0261927X07300074} {Language-based discrimination: Blatant and subtle forms}.
+\newblock \emph{Journal of Language and Social Psychology}, 26(2):106--122.
+
+\bibitem[{Perez~Almendros et~al.(2020)Perez~Almendros, Espinosa~Anke, and Schockaert}]{perez-almendros-etal-2020-dont}
+Carla Perez~Almendros, Luis Espinosa~Anke, and Steven Schockaert. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.coling-main.518} {Don{'}t patronize me! an annotated dataset with patronizing and condescending language towards vulnerable communities}.
+\newblock In \emph{Proceedings of the 28th International Conference on Computational Linguistics}, pages 5891--5902, Barcelona, Spain (Online). International Committee on Computational Linguistics.
+
+\end{thebibliography}
