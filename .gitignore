@@ -181,6 +181,7 @@ src/runs/
 src/my_awesome_model
 src/outputs
 src/wandb
+src/models/
 
 # Ignore eda
 src/eda_nlp/
