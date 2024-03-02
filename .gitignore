@@ -178,6 +178,9 @@ src/baseline/runs/
 
 # Ignore runs
 src/runs/
+src/my_awesome_model
+src/outputs
+src/wandb
 
 # Ignore eda
 src/eda_nlp/
