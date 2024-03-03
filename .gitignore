@@ -182,6 +182,9 @@ src/my_awesome_model
 src/outputs
 src/wandb
 src/models/
+src/bert-base-cased
+src/roberta-base
+bin/models
 
 # Ignore eda
 src/eda_nlp/
