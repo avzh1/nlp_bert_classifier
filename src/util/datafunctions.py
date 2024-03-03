@@ -5,11 +5,11 @@ def generate_data_splits(train_data):
     # The stratify parameter makes a split so that the proportion of values in the sample produced will be the same as the proportion of values provided to parameter stratify. 
 
     X_train, X_val, y_train, y_val = train_test_split(train_data[['text', 'keyword', 'country_code']]
-                                                    , train_data['label']
+                                                    , train_data['labels']
                                                     , train_size=0.8
                                                     , test_size=0.2
                                                     , random_state=0
-                                                    , stratify=train_data[['label']]
+                                                    , stratify=train_data[['labels']]
                                                     )
    
     return X_train, X_val, y_train, y_val

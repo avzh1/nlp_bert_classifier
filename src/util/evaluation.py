@@ -10,7 +10,7 @@ def performance_metrics(trainer, dataloader):
     predictions = trainer.predict(dataloader)
     predictions = predictions.label_ids
     
-    expected = np.array(dataloader.data['label'])
+    expected = np.array(dataloader.data['labels'])
     expected = expected.astype(int)
 
     print(classification_report(expected, predictions))
