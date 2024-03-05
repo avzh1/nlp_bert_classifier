@@ -187,6 +187,7 @@ src/roberta-base
 bin/models
 src/bert-base-uncased/
 src/distilbert-base-uncased-no-mask/
+src/roberta-base-masked/
 
 
 # Ignore eda
