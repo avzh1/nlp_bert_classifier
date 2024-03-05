@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2023)
+This is BibTeX, Version 0.99d (TeX Live 2022/CVE-2023-32700 patched)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: my_paper.aux
 The style file: acl_natbib.bst
@@ -10,40 +10,72 @@ Database file #1: references.bib
 Warning--entry type for "nlp-imbalanced-data" isn't style-file defined
 --line 61 of file references.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1896 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1896 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1896 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1896 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1896 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1896 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1896 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1896 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1967 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1967 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1967 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1967 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1967 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1967 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1967 of file acl_natbib.bst
+Too many commas in name 1 of "Haixing Dai, Zheng Liu, Wenxiong Liao, Xiaoke Huang, Yihan Cao, Zihao Wu, Lin Zhao et al" for entry Dai2023AugGPTLC
+while executing---line 1967 of file acl_natbib.bst
 Warning--empty booktitle in Dai2023AugGPTLC
 You've used 6 entries,
             3571 wiz_defined-function locations,
-            738 strings with 7486 characters,
-and the built_in function-call counts, 5129 in all, are:
-= -- 409
-> -- 306
-< -- 5
-+ -- 99
-- -- 93
-* -- 363
-:= -- 793
+            738 strings with 7306 characters,
+and the built_in function-call counts, 4151 in all, are:
+= -- 371
+> -- 151
+< -- 6
++ -- 48
+- -- 42
+* -- 252
+:= -- 640
 add.period$ -- 24
 call.type$ -- 6
-change.case$ -- 64
+change.case$ -- 47
 chr.to.int$ -- 6
 cite$ -- 7
-duplicate$ -- 326
-empty$ -- 350
-format.name$ -- 109
-if$ -- 1112
+duplicate$ -- 273
+empty$ -- 333
+format.name$ -- 56
+if$ -- 937
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 69
+missing$ -- 52
 newline$ -- 32
 num.names$ -- 24
-pop$ -- 154
+pop$ -- 118
 preamble$ -- 1
-purify$ -- 55
+purify$ -- 38
 quote$ -- 0
-skip$ -- 221
+skip$ -- 222
 stack$ -- 0
 substring$ -- 167
-swap$ -- 175
+swap$ -- 139
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
@@ -52,4 +84,4 @@ warning$ -- 1
 while$ -- 25
 width$ -- 0
 write$ -- 78
-(There were 2 warnings)
+(There were 16 error messages)

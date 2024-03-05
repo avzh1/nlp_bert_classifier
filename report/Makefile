@@ -4,7 +4,7 @@ MAIN = my_paper
 
 all: $(MAIN).pdf
 
-$(MAIN).pdf: $(MAIN).tex 
+$(MAIN).pdf: $(MAIN).tex references.bib
 	pdflatex -interaction nonstopmode $(MAIN).tex || true
 	bibtex $(MAIN) || true
 	pdflatex -interaction nonstopmode $(MAIN).tex || true

@@ -236,9 +236,9 @@ The highest weighted words in the Linear Regression model, that is, the words wh
     \label{fig:accuracy-per-pcl-cateogry}
 \end{figure}
 
-Figure~\ref{fig:accuracy-per-pcl-cateogry} shows that the model is the best at categorizing the two extreams of PCL, and is worse at categorizing the middle categories. This is likely because these are the most subjective; indeed, we recall from \citet{perez-almendros-etal-2020-dont} that labels between 1 and 3 are the texts which contain the most clashing options between annotators on the binary scale (where, for instance, a score of 1 is because one annotator scored 0 and the other 1).
+Figure~\ref{fig:accuracy-per-pcl-cateogry} shows that the model is the best at categorizing the two extremes of PCL, and is worse at categorizing the middle categories. This is likely because these are the most subjective; indeed, we recall from \citet{perez-almendros-etal-2020-dont} that labels between 1 and 3 are the texts which contain the most clashing options between annotators on the binary scale (where, for instance, a score of 1 is because one annotator scored 0 and the other 1).
 
-We therefore conclude that the model is as good at categorizing the blatant PCL as it is for trivially non-PCL, with the least accuracy in the boundary labels between label 1 and label 2.
+We therefore conclude that the model is as good at categorizing the blatant PCL as it is for obvious non-PCL, with the least accuracy in the boundary labels between label 1 and label 2.
 
 \subsection*{Effect of input sequence length on model performance}
 
@@ -249,7 +249,7 @@ We therefore conclude that the model is as good at categorizing the blatant PCL 
     \label{fig:accuracy-word-count}
 \end{figure}
 
-Figure~\ref{fig:accuracy-word-count} shows that the overall accuracy of the model declines as we increase the word count. We note that for sentences greater than $300$ this is likely to converge, as the tokenizer used truncates sentences to this length. However, the overall downward trend is likley due to attention in the RoBERTa model architecutre. As the word count grows, the model's ability to capture and process dependencies between distant words may diminish, leading to a decline in overall accuracy.
+Figure~\ref{fig:accuracy-word-count} shows that the overall accuracy of the model declines as we increase the word count. We note that for sentences greater than $300$ this is likely to converge, as the tokenizer used truncates sentences to this length. However, the overall downward trend is likley due to attention in the RoBERTa model architecture. As the word count grows, the model's ability to capture and process dependencies between distant words may diminish, leading to a decline in overall accuracy.
 
 \subsection*{Effect of PCL category on model performance}
 
@@ -261,11 +261,15 @@ Figure~\ref{fig:accuracy-word-count} shows that the overall accuracy of the mode
 \end{figure}
 
 
-The keyword was not used during trianing, and therefore, the model lacks context regarding the background of the text. It therefore is left to find the abstract themes itsself. Figure~\ref{fig:accuracy-keyword} shows this, and an especially poor accuracy for keyword:`immigrant' and `migrant'. These keywords are related, and the model is inaccurate when classifying whether there's PCL in text for these two classes. Contrarily, the accuracy of non-PCL language for these keywords is very high, suggesting that the model is more biased into thinking text about these two topics is non PCL.
+The keyword was not used during trianing, and therefore, the model lacks context regarding the background of the text. It therefore is left to find the abstract themes itself. Figure~\ref{fig:accuracy-keyword} shows this, and an especially poor accuracy for keyword:`immigrant' and `migrant'. These keywords are related, and the model is inaccurate when classifying whether there's PCL in text for these two classes. Conversely, the accuracy of non-PCL language for these keywords is very high, suggesting that the model is is likely to predict non-PCL language for these keywords.
 
 \section{Conclusion}
 
-In conclusion, the combination of careful pre-processing and data augmentation techniques with masking and a fine-tuned RoBERTa model has outperformed the baseline model with an F-1 score of 0.82 and 0.57 for the test and validation set respectively. We have also shown that the model is better at predicting extremes of patronizing content, but less accurate for borderline cases. Findings from the anlysis reqire more engineering when analysing text of longer lengths, as well as investigating the effects of further hyperparameter tuning with repsect to depth of translation (discussed in Section~\ref{sect:translation}). Further research should be made to encode information regarding the available `keyword' field into the model to provide a better theme encoding to influence the PCL categorization.
+In conclusion, the combination of careful pre-processing and data augmentation techniques with masking and a fine-tuning has outperformed the baseline model with an F-1 score of 0.82 and 0.57 for the train and validation set respectively. We have also shown that the model is better at predicting extremes of patronizing content, but less accurate for borderline cases: where the distinction between non-PCL and PCL becomes more subjective. 
+
+An important finding from the analysis is that the model is not as accurate when classifying PCL language for the keywords `immigrant' and `migrant'. It is however very good at predicting whether sentences do not contain PCL -- this is wanted behaviour. If the model were to be deployed on a social media platform, it would be very unlikely to censor non-PCL language.
+
+Further research should be made to encode information regarding the available `keyword' field into the model to provide a better theme encoding to influence the PCL categorization. Additionally, the model should be tested on a more balanced dataset, as this is very likely to improve test performance. Finally, it was hypothesized that typos in the model, as mentioned in Section~\ref{sect:artifacts}, would be ignored during the tokenizer stage, which could allow users to bypass the model. An improvement would be to come up with novel ways to manage typos, and possibly, intentional encodings (such as `leetspeak' and `pig latin').
 
 \bibliography{references}
 \bibliographystyle{acl_natbib}
