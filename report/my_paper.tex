@@ -57,12 +57,12 @@ I propose an extension to the base-line categorization model `\texttt{RoBERTa}' 
     \centering
     \begin{tabular}{|l||c|c|}
         \hline
-        Model & F1 dev-set & F1 val-set \\
+         & F1 dev-set & F1 val-set \\
         \hline
         \hline
-        Baseline & 0.48 & 0.49 \\
+        Baseline Model & 0.48 & 0.49 \\
         \hline
-        Mine  & 0.82 & 0.57 \\
+        Proposed Model  & 0.82 & 0.57 \\
         \hline
     \end{tabular}
     \caption{F1 score of PCL language for baseline model compared to final model}    
@@ -146,7 +146,7 @@ Further effots were dedicated to rephrasing the text with the help of a pre-trai
 
 \subsection{Successful Considerations}
 
-\subsubsection{Translation}
+\subsubsection{Translation}\label{sect:translation}
 
 This upsampling technique is inspired by \citet{nlp-imbalanced-data} who suggests translating the text into a non-English language and then back into English. The hope is that translating back introduces new wording and structure without augmenting the sentiment of the sentence. We take this a step further by introducing a parameter to control the depth of translation.
 
@@ -164,27 +164,58 @@ By tokenizing the input, we can efficiently assign \texttt{[UNKNOWN]} tokens to 
 
 Further benefit of tokenization includes the choice of randomly masking a subset of words in the input. This allows models to capture rich contextual information and dependencies in language. This means that our model generalizes well to various text classification tasks, even when faced with different writing styles, vocabulary, and sentence structures, which is vital for detecting unseen ways to patronize.
 
-\section{Modelling}\label{sect:model}
+\section{Model}\label{sect:model}
 
 \subsection{Final model predictions}
+
+Experiments were conducted on BERT, RoBERTa, and DistilBERT architectures. RoBERTa performed the best, and therefore was used as the base model for the final architecture. We considered masked and un-masked models, and found that the masked model performed better. The results are shown in Table~\ref{tab:final-model-predictions}.
+
 \begin{table*}[!h]
     \centering
-    \begin{tabular}{|l||c|c|c|c|}
+    \begin{tabular}{|c||c|c|c|c|}
         \hline
-        Model & F1 dev-set & F1 val-set & s & s\\
+        Model & \multicolumn{2}{|c|}{Masked} & \multicolumn{2}{c|}{Un-Masked} \\
+         & F1 dev-set & F1 val-set & F1 dev-set & F1 val-set \\
         \hline
         \hline
-        Model & F1 dev-set & F1 val-set & s & s \\
+        BERT uncased & - & - & 0.86 & 0.5363 \\
+        BERT cased & - & - & 0.9465 & 0.5097 \\
+        RoBERTa & 0.8193 & \framebox{0.5727} & 0.8677 & 0.5404 \\
+        DistilBERT & 0.7989 & 0.5152 & 0.8007 & 0.4949 \\
         \hline
     \end{tabular}
-    \caption{F1 score of PCL language for baseline model compared to final model}    
+    \caption{F1 score of PCL language models attempted}    
+    \label{tab:final-model-predictions}
 \end{table*}
 
 \subsection{Hyper-parameters}
-For the final model architecture, we use a linear layer on top of a RoBERTa base model. We experimented with various other architecture, such as BERT, RoBERT, DistilBERT, along with the number of output neurons. In the end, our model has 2 output neurons, corresponding to non-PCL and PCL -- the higher neuron is the prediction. We trained the model for 5 epochs with no early stopping and an initial learning rate of $2 \times 10^{-5}$. Even through the different BERT flavours have similar performance -- which we hypothesize is due to the data augmentation step -- we chose the best performance on a validation set.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        hyper-param & value \\
+        \hline
+        \hline
+        text truncation & 300 \\
+        mask tokens & True \\
+        mlm probability & 0.15 \\
+        batch size & 16 \\
+        learning rate & $2 \times 10^{-5}$ \\
+        epochs & 5 \\
+        warmup steps & 100 \\
+        weight decay & 0.01 \\
+        weighted loss & True \\
+        translation depth & 3 \\
+        \hline
+    \end{tabular}
+    \caption{Hyper-parameters}
+    \label{tab:hyper-parameters}
+\end{table}
+
+For the final model architecture, we use a linear layer on top of a RoBERTa base model. The submission model has 2 output neurons, corresponding to non-PCL and PCL -- the higher neuron is the prediction. We trained the model for 5 epochs with no early stopping and an initial learning rate of $2 \times 10^{-5}$. Even through the different BERT flavours have similar performance -- which we hypothesize is due to the data augmentation step -- we chose the best performance on a validation set (see Table~\ref{tab:final-model-predictions}).
 
 The most significant model improvement was the introduction of a weighted loss criterion, which scales loss depending on the rarity of the class in the dataset. In this case, the loss is scaled significantly for PCL examples, of which there are few. This means that the model is incentivized to learn information from the minority class.
-
 
 \section{Results}
 
@@ -206,6 +237,8 @@ The highest weighted words in the Linear Regression model, that is, the words wh
 \end{figure}
 
 Figure~\ref{fig:accuracy-per-pcl-cateogry} shows that the model is the best at categorizing the two extreams of PCL, and is worse at categorizing the middle categories. This is likely because these are the most subjective; indeed, we recall from \citet{perez-almendros-etal-2020-dont} that labels between 1 and 3 are the texts which contain the most clashing options between annotators on the binary scale (where, for instance, a score of 1 is because one annotator scored 0 and the other 1).
+
+We therefore conclude that the model is as good at categorizing the blatant PCL as it is for trivially non-PCL, with the least accuracy in the boundary labels between label 1 and label 2.
 
 \subsection*{Effect of input sequence length on model performance}
 
@@ -232,15 +265,19 @@ The keyword was not used during trianing, and therefore, the model lacks context
 
 \section{Conclusion}
 
-In conclusion, the combination of careful pre-processing and data augmentation techniques with masking and a fine-tuned RoBERTa model has outperformed the baseline model. We have also shown that the model is better at predicting extremes of patronizing content, but less accurate for borderline cases. Findings from the anlysis reqire more engineering when analysing text of longer lengths.
-
-% In conclusion, we have successfully implemented a model which outperforms the baseline model. We have also shown that the model is better at predicting examples with a higher level of patronising content, and that the length of the input sequence impacts the model performance. We have also shown that the model performance depends on the data categories.
-
-\clearpage
-
-\appendix
+In conclusion, the combination of careful pre-processing and data augmentation techniques with masking and a fine-tuned RoBERTa model has outperformed the baseline model with an F-1 score of 0.82 and 0.57 for the test and validation set respectively. We have also shown that the model is better at predicting extremes of patronizing content, but less accurate for borderline cases. Findings from the anlysis reqire more engineering when analysing text of longer lengths, as well as investigating the effects of further hyperparameter tuning with repsect to depth of translation (discussed in Section~\ref{sect:translation}). Further research should be made to encode information regarding the available `keyword' field into the model to provide a better theme encoding to influence the PCL categorization.
 
 \bibliography{references}
 \bibliographystyle{acl_natbib}
+
+\appendix
+
+\section{Supplementary Material}
+
+\begin{figure}[H]
+    \includegraphics[trim=0 0 15.5cm 0, clip, width=\linewidth]{figures/final-loss.png}
+    \caption{Training loss for the final submission model}
+    \label{fig:final-loss}
+\end{figure}
 
 \end{document}
