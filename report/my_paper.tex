@@ -17,7 +17,7 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{hyperref}
-
+\usepackage{float}
 \usepackage{url}
 
 \aclfinalcopy % Uncomment this line for the final submission
@@ -57,12 +57,15 @@ I propose an extension to the base-line categorization model `\texttt{RoBERTa}' 
     \centering
     \begin{tabular}{|l||c|c|}
         \hline
-        Model              & F1 dev-set & F1 val-set \\
+        Model & F1 dev-set & F1 val-set \\
         \hline
-        Mine               & ?          & ?          \\
+        \hline
+        Baseline & 0.48 & 0.49 \\
+        \hline
+        Mine  & 0.82 & 0.57 \\
         \hline
     \end{tabular}
-    \caption{F1 score of models attempted}    
+    \caption{F1 score of PCL language for baseline model compared to final model}    
 \end{table}
 
 \section{Data Analysis}
@@ -78,13 +81,16 @@ I propose an extension to the base-line categorization model `\texttt{RoBERTa}' 
 
 Labels arrive annotated by two main annotators. Their values span from $[0,4]$ indicating the level of PCL within the text snippet. \citet{perez-almendros-etal-2020-dont} explains how both annotators individually classify each sentence with a score in the range $[0,2]$ to indicate the strength of PCL from: no PCL, borderline PCL and blatant PCL. These scores were then summed to produce a 5-point scale of PCL, where the range $[0,1]$ indicates a negative example, and $[2,4]$ indicating a positive example.
 
-Data also arrives with labeled country information indicating the source media outlet, and a keyword field. The keyword is provided as input to the model as the search term used to retrieve texts about a target community.
+Data also arrives with labeled country information indicating the source media outlet, and a keyword field. The keyword is provided as input to the model as the search term used to retrieve texts about a target community. A distribution of these fields is shown in Figure~\ref{fig:dev-set-distribution}. Here, the supplied dev dataset contains a disproportionate number of negative (9475) and positive (993) examples of PCL.
 
-\subsection{Data Distribution}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{figures/test_distribution.png}
+    \caption{Pie charts of different label distributions in the supplied dev-set}
+    \label{fig:dev-set-distribution}
+\end{figure*}
 
-% The data arrives labeled with a balanced distribution between countries and keyword.
-
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[trim=0cm 0cm 0cm .8cm, clip, width=\linewidth]{figures/text-input-length-by-binary-patronizing.png}
     \caption{Histogram of word count by PCL (true) and non PCL (false)\footnotemark}
@@ -93,7 +99,7 @@ Data also arrives with labeled country information indicating the source media o
 
 \footnotetext{Without loss of generality, text with more than 250 words have been clipped}
 
-The test data contains a disproportionate number of negative (9475) and positive (993) examples of PCL. Furthermore, the distribution of word counts between the two (See Figure~\ref{fig:word-count}) offers no obvious underlying pattern between the two classes. This is because natural language is about how words are said, instead of the quantity. 
+Furthermore, the distribution of word counts between the two (See Figure~\ref{fig:word-count}) offers no obvious underlying pattern between the two classes. This is because natural language is about how words are said, instead of the quantity. 
 
 \subsection{Subjective Difficulty}
 
@@ -105,8 +111,6 @@ The flexible environment of news articles allows for authors to post resources a
 
 Lastly, adding to the complexity of processing language, we must also filter and process out-of-vocabulary words. This may appear in the form of a typo like in par\_id: 8221 \emph{``Do they think it is "" \textbf{jsutice} "" \textbf{ti} imprison [...]''}, hyperboles like par\_id: 5333 \emph{``But \textbf{nooooo} [...]''}, or slang like in par\_id: 1674 \emph{``Kyle really your a pig, \textbf{lol} [...]''}.
 
-\section{Input strategy}
-
 % \textbf{10 marks}: Further model improvements (beyond using a bigger transformer model), for example pre-processing, data sampling, data augmentation, ensembling, etc. Two main improvements, with a third less explored improvement is sufficient. For example: try several different data sampling approaches, try several data augmentation strategies by perturbing observations in different ways, and then see if incorporating one of the categorical columns improves performance.
 
 % \begin{itemize}
@@ -115,31 +119,50 @@ Lastly, adding to the complexity of processing language, we must also filter and
 %     \item using country code also
 % \end{itemize}
 
-The data is very imbalanced; Section~\ref{sect:feature-distribution} discusses the sparsity of positive PCL examples in the training data. This less-so because of poor sampling, but rather reflecting the distribution of PCL in media. Therefore, it is possible that the model may experience great performance in the majority negative class, and fail to learn details about the minority positive class (\citet{alberto-imbalanced-datasets}). We therefore propose a few methods to increase the amount of training data available to the model (Section~\ref{sect:model}).
+\section{Minority Upsampling}
 
-\subsection{Pre-processing}
+The data is very imbalanced; Section~\ref{sect:feature-distribution} discusses the sparsity of positive PCL examples in the training data. Therefore, it is possible that the model may experience great performance in the majority negative class, and fail to learn details about the minority positive class (\citet{alberto-imbalanced-datasets}).
 
 We can synthetically produce more data points for the minority positive class by changing the content of the sample without changing the sentiment of the text. 
 
-\subsubsection{Random Sentence Mutations}
+\subsection{Failed Considerations}
 
-Section~\ref{sect:artifacts} describes artifacts in the training data that may be problematic in their small quantities. However, we may switch the ordering of letters within words to purposefully mimic grammatical mistakes. Not only will this provide for potentially more data, it also trains the network to be more resilient to spelling mistakes which is an important edge case for models to handle. 
+All data augementations are equal, but some are more equal than others; throughout development, considerations for data augmentations were made, but not all were implemented.
 
-\subsubsection{Synonym insertion}
+\subsubsection{Stop Word Removal}
 
-% https://towardsdatascience.com/data-preprocessing-in-nlp-c371d53ba3e0
+Stop words contain little value, so can useful to decrease the length of sentence. However, it may change the sentiment of a sentnece: ``I do not like you because I'm better than you'' changed into ``I like I'm better'', thus removing all PCL sentiment from the sentence, and rendering an innefective augmentation.
 
-Another technique for synthetically increasing the number of positive examples is to replace some words with synonyms without changing a sentence's sentiment. For this, we have to have enough synonym variety whilst minimizing the cosine distance between the two swapped words. The hope is to form legitimate sentences with equal PCL scores.
+\subsubsection{Easy Data Augmentation}
 
-\subsubsection{Masking inputs}
+\citet{wei-zou-2019-eda} propose a pipeline to tweak sentences by replacing, deleting, swapping and inserting words. The authors comment that by fine-tuning replacement parameters and the upsampling factor, it can ``can boost performance on text classification tasks''. However, we found that the model quickly overfit within one epoch.
 
-Finally, an experiment surrounding masking entries in sentences is a potential useful augmentation that may increase the pool of available positive samples. This may help with boundary cases of PCL, as often a few words changed may increase the degree of PCL. Therefore, by masking there is a high chance that irrelevant filler words may be covered which will force more attention on more significant vocabulary. 
+\subsubsection{Rephrasing Models}
 
-\subsection{Data Sampling}
+Further effots were dedicated to rephrasing the text with the help of a pre-trained GPT-2 model as suggested by \citet{Dai2023AugGPTLC}. However, significant inconsistencies were discovered depending on the sentence length, so ultimately this effort was abandoned.
 
-With the above synthetic augmentations to data, we should obtain enough data to evenly batch training with even quantities of negative and positive examples, thus solving the data imbalance issue and allowing for a more balanced F-1 score.
+\subsection{Successful Considerations}
+
+\subsubsection{Translation}
+
+This upsampling technique is inspired by \citet{nlp-imbalanced-data} who suggests trainslating the text into a non-english language and then back into English. The hope is that translating back introduces new wording and structure without augmenting the sentiment of the sentence. We take this a step further by introducing a parameter to control the depth of translation.
+
+\subsubsection{Swapping Sentences}
+
+Within the same paragraph, we can swap the ordering of sentences. This augmentation was less researched by helped upsample the minority class.
+
+\section{Data Augmentation}
+
+\subsection{Tokenization}
+
+By tokenizing the input, we can efficiently assign \texttt{[UNKNOWN]} tokens to out-of-vocabulary words. This is important for a pre-trained model which are trained on well-formed English text, and may not understand slang or typos.
+
+\subsection{Masking inputs}
+
+Further benefit of tokenization includes the choice of randomly masking a subset of words in the input. This allows models to capture rich contextual information and dependencies in language. This allows the model to generalize well to various text classification tasks, even when faced with different writing styles, vocabulary, and sentence structures.
 
 \section{Modelling}\label{sect:model}
+
 
 \emph{For the successful implementation of a classifier model (this could be a transformer or any other ML model of your choice. Do give justification for your choice.):}
 
@@ -174,6 +197,10 @@ With the above synthetic augmentations to data, we should obtain enough data to 
 \textbf{5 marks}: Conclusion, with a summary of your results, and your key
 findings from the analysis questions. You should suggest at least one further
 experiment as a next step.
+
+\clearpage
+
+\appendix
 
 \bibliography{references}
 \bibliographystyle{acl_natbib}
