@@ -185,6 +185,9 @@ src/models/
 src/bert-base-cased
 src/roberta-base
 bin/models
+src/bert-base-uncased/
+src/distilbert-base-uncased-no-mask/
+
 
 # Ignore eda
 src/eda_nlp/
