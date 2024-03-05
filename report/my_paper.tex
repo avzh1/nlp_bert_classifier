@@ -198,14 +198,43 @@ The highest weighted words in the Linear Regression model, that is, the words wh
 
 \subsection*{Effect of level of PCL on model performance}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/accuracy_per_pecl_lebl.png}
+    \caption{Accuracy of each PCL category}
+    \label{fig:accuracy-per-pcl-cateogry}
+\end{figure}
 
+Figure~\ref{fig:accuracy-per-pcl-cateogry} shows that the model is the best at categorizing the two extreams of PCL, and is worse at categorizing the middle categories. This is likely because these are the most subjective; indeed, we recall from \citet{perez-almendros-etal-2020-dont} that labels between 1 and 3 are the texts which contain the most clashing options between annotators on the binary scale (where, for instance, a score of 1 is because one annotator scored 0 and the other 1).
 
 \subsection*{Effect of input sequence length on model performance}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/accuracy_due_to_word_length.png}
+    \caption{Accuracy of model against word count}
+    \label{fig:accuracy-word-count}
+\end{figure}
+
+Figure~\ref{fig:accuracy-word-count} shows that the overall accuracy of the model declines as we increase the word count. We note that for sentences greater than $300$ this is likely to converge, as the tokenizer used truncates sentences to this length. However, the overall downward trend is likley due to attention in the RoBERTa model architecutre. As the word count grows, the model's ability to capture and process dependencies between distant words may diminish, leading to a decline in overall accuracy.
+
 \subsection*{Effect of PCL category on model performance}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/accuracy_per_pcl_type_keyword.png}
+    \caption{Accuracy of model against keyword of targeted group}
+    \label{fig:accuracy-keyword}
+\end{figure}
+
+
+The keyword was not used during trianing, and therefore, the model lacks context regarding the background of the text. It therefore is left to find the abstract themes itsself. Figure~\ref{fig:accuracy-keyword} shows this, and an especially poor accuracy for keyword:`immigrant' and `migrant'. These keywords are related, and the model is inaccurate when classifying whether there's PCL in text for these two classes. Contrarily, the accuracy of non-PCL language for these keywords is very high, suggesting that the model is more biased into thinking text about these two topics is non PCL.
 
 \section{Conclusion}
-In conclusion, we have successfully implemented a model which outperforms the baseline model. We have also shown that the model is better at predicting examples with a higher level of patronising content, and that the length of the input sequence impacts the model performance. We have also shown that the model performance depends on the data categories.
+
+In conclusion, the combination of careful pre-processing and data augmentation techniques with masking and a fine-tuned RoBERTa model has outperformed the baseline model. We have also shown that the model is better at predicting extremes of patronizing content, but less accurate for borderline cases. Findings from the anlysis reqire more engineering when analysing text of longer lengths.
+
+% In conclusion, we have successfully implemented a model which outperforms the baseline model. We have also shown that the model is better at predicting examples with a higher level of patronising content, and that the length of the input sequence impacts the model performance. We have also shown that the model performance depends on the data categories.
 
 \clearpage
 
