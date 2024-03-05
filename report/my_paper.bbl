@@ -1,50 +1,32 @@
 \begin{thebibliography}{6}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
-\bibitem[{Fernández et~al.(2018)Fernández, García, Galar, Prati, Krawczyk,
-  and Herrera}]{alberto-imbalanced-datasets}
-Alberto Fernández, Salvador García, Mikel Galar, Ronaldo~C. Prati, Bartosz
-  Krawczyk, and Francisco Herrera. 2018.
-\newblock \href {https://doi.org/https://doi.org/10.1007/978-3-319-98074-4}
-  {\emph{Learning from Imbalanced Data Sets}}.
+\bibitem[{Fernández et~al.(2018)Fernández, García, Galar, Prati, Krawczyk, and Herrera}]{alberto-imbalanced-datasets}
+Alberto Fernández, Salvador García, Mikel Galar, Ronaldo~C. Prati, Bartosz Krawczyk, and Francisco Herrera. 2018.
+\newblock \href {https://doi.org/https://doi.org/10.1007/978-3-319-98074-4} {\emph{Learning from Imbalanced Data Sets}}.
 \newblock Springer Cham.
 
 \bibitem[{Haixing~Dai(2023)}]{Dai2023AugGPTLC}
-Wenxiong Liao Xiaoke Huang Yihan Cao Zihao Wu Lin Zhao et~al Haixing~Dai,
-  Zheng~Liu. 2023.
-\newblock \href {https://api.semanticscholar.org/CorpusID:257631936} {Auggpt:
-  Leveraging chatgpt for text data augmentation}.
+Wenxiong Liao Xiaoke Huang Yihan Cao Zihao Wu Lin Zhao et~al Haixing~Dai, Zheng~Liu. 2023.
+\newblock \href {https://api.semanticscholar.org/CorpusID:257631936} {Auggpt: Leveraging chatgpt for text data augmentation}.
 
 \bibitem[{Nallamuthu(2023)}]{nlp-imbalanced-data}
 Nandhini Nallamuthu. 2023.
-\newblock \href
-  {https://www.analyticsvidhya.com/blog/2020/11/handling-imbalanced-data-machine-learning-computer-vision-and-nlp/}
-  {Handling imbalanced data – machine learning, computer vision and nlp}.
+\newblock \href {https://www.analyticsvidhya.com/blog/2020/11/handling-imbalanced-data-machine-learning-computer-vision-and-nlp/} {Handling imbalanced data – machine learning, computer vision and nlp}.
 
 \bibitem[{Ng(2007)}]{Ng-discrimination}
 Sik~Hung Ng. 2007.
-\newblock \href {https://doi.org/10.1177/0261927X07300074} {Language-based
-  discrimination: Blatant and subtle forms}.
+\newblock \href {https://doi.org/10.1177/0261927X07300074} {Language-based discrimination: Blatant and subtle forms}.
 \newblock \emph{Journal of Language and Social Psychology}, 26(2):106--122.
 
-\bibitem[{Perez~Almendros et~al.(2020)Perez~Almendros, Espinosa~Anke, and
-  Schockaert}]{perez-almendros-etal-2020-dont}
+\bibitem[{Perez~Almendros et~al.(2020)Perez~Almendros, Espinosa~Anke, and Schockaert}]{perez-almendros-etal-2020-dont}
 Carla Perez~Almendros, Luis Espinosa~Anke, and Steven Schockaert. 2020.
-\newblock \href {https://doi.org/10.18653/v1/2020.coling-main.518} {Don{'}t
-  patronize me! an annotated dataset with patronizing and condescending
-  language towards vulnerable communities}.
-\newblock In \emph{Proceedings of the 28th International Conference on
-  Computational Linguistics}, pages 5891--5902, Barcelona, Spain (Online).
-  International Committee on Computational Linguistics.
+\newblock \href {https://doi.org/10.18653/v1/2020.coling-main.518} {Don{'}t patronize me! an annotated dataset with patronizing and condescending language towards vulnerable communities}.
+\newblock In \emph{Proceedings of the 28th International Conference on Computational Linguistics}, pages 5891--5902, Barcelona, Spain (Online). International Committee on Computational Linguistics.
 
 \bibitem[{Wei and Zou(2019)}]{wei-zou-2019-eda}
 Jason Wei and Kai Zou. 2019.
-\newblock \href {https://www.aclweb.org/anthology/D19-1670} {{EDA}: Easy data
-  augmentation techniques for boosting performance on text classification
-  tasks}.
-\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
-  Natural Language Processing and the 9th International Joint Conference on
-  Natural Language Processing (EMNLP-IJCNLP)}, pages 6383--6389, Hong Kong,
-  China. Association for Computational Linguistics.
+\newblock \href {https://www.aclweb.org/anthology/D19-1670} {{EDA}: Easy data augmentation techniques for boosting performance on text classification tasks}.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)}, pages 6383--6389, Hong Kong, China. Association for Computational Linguistics.
 
 \end{thebibliography}
